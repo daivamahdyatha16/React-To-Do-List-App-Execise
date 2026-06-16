@@ -1,11 +1,13 @@
-import { Checkbox } from "./ui/checkbox"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "./ui/input-group"
+import { useState } from "react"
+import GradientCheckbox from "../inputs/GradientCheckbox"
+import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group"
 
-const Header = () =>{
+const Header = () => {
+  const [title, setTitle] = useState("")
+  const [done, setDone] = useState(false)
+
+  
+
   return (
     <main>
       <div className="relative h-75 bg-[url('/src/assets/background-header.png')] bg-cover bg-center">
@@ -17,11 +19,18 @@ const Header = () =>{
               </h1>
               <InputGroup className="h-12 bg-white px-2">
                 <InputGroupAddon className="px-4">
-                  <Checkbox className="size-7 rounded-full" />
+                  <GradientCheckbox
+                    checked={done}
+                    onCheckedChange={(checked) => {
+                      setDone(checked)
+                    }}
+                  />
                 </InputGroupAddon>
                 <InputGroupInput
                   className="text-black"
                   placeholder="Create a to do"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </InputGroup>
             </div>
@@ -32,4 +41,4 @@ const Header = () =>{
   )
 }
 
-export default Header;
+export default Header
